@@ -5,14 +5,14 @@ so that this class can load images from both current directory and its subdirect
 """
 
 import torch.utils.data as data
-
+import numpy as np
 from PIL import Image
 import os
 
 IMG_EXTENSIONS = [
     '.jpg', '.JPG', '.jpeg', '.JPEG',
     '.png', '.PNG', '.ppm', '.PPM', '.bmp', '.BMP',
-    '.tif', '.TIF', '.tiff', '.TIFF',
+    '.tif', '.TIF', '.tiff', '.TIFF', '.npy'
 ]
 
 
@@ -35,6 +35,8 @@ def make_dataset(dir, max_dataset_size=float("inf")):
 def default_loader(path):
     return Image.open(path).convert('RGB')
 
+def numpy_loader(path):
+    return np.load(path)
 
 class ImageFolder(data.Dataset):
 
